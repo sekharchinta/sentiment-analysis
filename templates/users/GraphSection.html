@@ -2,45 +2,25 @@
 {% load static %}
 
 {% block contents %}
-    <style>
-        .graph-section {
-            margin: 0 auto;
-            padding: 20px 10px 40px;
-            color: #e2e8f0;
-        }
+<style>
+    .graph-wrap { max-width: 800px; margin: 0 auto; }
+</style>
 
-        h3 {
-            color: #60a5fa;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+<div class="graph-wrap">
+    <h2 class="page-title text-center">ML Models Accuracy Comparison</h2>
 
-        .graph-img {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .graph-img img {
-            max-width: 80%;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .graph-error {
-            text-align: center;
-            padding: 40px;
-            color: #f87171;
-        }
-    </style>
-
-    <div class="graph-section">
-        {% if combined_accuracy_chart %}
-            <h3>ML Models Accuracy Comparison</h3>
-            <div class="graph-img">
-                <img src="data:image/png;base64,{{ combined_accuracy_chart }}">
+    {% if combined_accuracy_chart %}
+        <div class="chart-frame">
+            <img src="data:image/png;base64,{{ combined_accuracy_chart }}" alt="Model accuracy comparison chart">
+        </div>
+    {% elif error %}
+        <div class="card">
+            <div style="text-align:center; font-size:2.2rem;">&#128202;</div>
+            <p class="text-center text-muted mt-2">{{ error }}</p>
+            <div class="text-center mt-3">
+                <a href="{% url 'training' %}" class="btn btn-primary">Go to Training</a>
             </div>
-        {% elif error %}
-            <div class="graph-error">{{ error }}</div>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

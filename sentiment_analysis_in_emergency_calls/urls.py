@@ -20,6 +20,7 @@ urlpatterns = [
     path("AdminLoginCheck/", admins.AdminLoginCheck, name="AdminLoginCheck"),
     path('RegisterUsersView/', admins.RegisterUsersView, name='RegisterUsersView'),
     path('ActivaUsers/', admins.ActivaUsers, name='ActivaUsers'),
+    path('ChangePassword/', admins.ChangePassword, name='ChangePassword'),
 
     # User views
     path("UserRegisterActions/", usr.UserRegisterActions, name="UserRegisterActions"),

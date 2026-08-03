@@ -3,118 +3,39 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Emergency Calls for Enhanced Police Dispatch Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #e2e8f0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: linear-gradient(to right, rgb(30, 58, 138), rgb(49, 46, 129), rgb(88, 28, 135));
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            padding: 1.25rem;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, rgb(96, 165, 250), rgb(34, 211, 238), rgb(45, 212, 191));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 0;
-        }
-
-        .navbar {
-            background: rgba(30, 41, 59, 0.85);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
-            padding: 0.75rem 1rem;
-        }
-
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
-            margin: 0;
-            padding: 0;
-        }
-
-        .navbar ul li a {
-            display: block;
-            color: #cbd5e1;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1.1rem;
-            border: 1px solid rgba(51, 65, 85, 0.4);
-            border-radius: 0.5rem;
-            background: rgba(30, 41, 59, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .navbar ul li a:hover {
-            color: #fff;
-            background: linear-gradient(to right, #2563eb, #06b6d4);
-            border-color: transparent;
-        }
-
-        .main-content {
-            flex: 1;
-            width: 92%;
-            max-width: 1280px;
-            margin: 2rem auto;
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
-            border-radius: 1rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            padding: 1.5rem;
-        }
-
-        footer {
-            background: linear-gradient(to right, rgb(30, 58, 138), rgb(49, 46, 129), rgb(88, 28, 135));
-            color: #cbd5e1;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.875rem;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User | Emergency Dispatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="{% static 'css/app.css' %}" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <h1>Sentiment Analysis for Smarter Emergency Response</h1>
+    <header class="app-header">
+        <div class="app-header-inner">
+            <a href="{% url 'UserHome' %}" class="brand">
+                <span class="brand-badge">&#128222;</span>
+                <span>Dispatch Analysis Portal</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{% url 'UserHome' %}" class="active">Home</a></li>
+                    <li><a href="{% url 'DatasetView' %}">Dataset</a></li>
+                    <li><a href="{% url 'training' %}">Train</a></li>
+                    <li><a href="{% url 'graph_section' %}">Graph</a></li>
+                    <li><a href="{% url 'prediction' %}">Prediction</a></li>
+                    <li><a href="{% url 'index' %}">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="{% url 'UserHome' %}">Home</a></li>
-            <li><a href="{% url 'DatasetView' %}">Dataset View</a></li>
-            <li><a href="{% url 'training' %}">Train</a></li>
-            <li><a href="{% url 'graph_section' %}">Graph</a></li>
-            <li><a href="{% url 'prediction' %}">Prediction</a></li>
-            <li><a href="{% url 'index' %}">Logout</a></li>
-        </ul>
-    </nav>
-
-    <div class="main-content">
+    <main class="app-main">
         {% block contents %}{% endblock %}
-    </div>
+    </main>
 
-    <footer>
-        © 2025 Emergency Calls for Enhanced Police Dispatch Services
+    <footer class="app-footer">
+        &copy; 2025 Emergency Calls for Enhanced Police Dispatch Services
     </footer>
+
 </body>
 </html>

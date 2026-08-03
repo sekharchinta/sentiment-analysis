@@ -1,86 +1,62 @@
 {% extends 'admins/adminbase.html' %}
 {% block contents %}
 
-<h2 align="center" style="font-weight:bold; color:#60a5fa;">View RegisterUser Details</h2>
+<h2 class="page-title">Registered User Details</h2>
 
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px auto;
-        background: rgba(255, 255, 255, 0.04);
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    }
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% else %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
-    th, td {
-        padding: 12px 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        text-align: left;
-        font-size: 14px;
-        color: #e2e8f0;
-    }
-
-    th {
-        background-color: #3b82f6;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    tr:nth-child(even) {
-        background-color: rgba(255, 255, 255, 0.03);
-    }
-
-    tr:hover {
-        background-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .btn-activate {
-        color: #34d399;
-        font-weight: 600;
-        text-decoration: none;
-    }
-
-    .btn-activate:hover {
-        text-decoration: underline;
-    }
-</style>
-
-<table>
-    <thead>
-        <tr>
-            <th>S.No</th>
-            <th>Name</th>
-            <th>Login ID</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Locality</th>
-            <th>Status</th>
-            <th>Activate</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for i in data %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ i.name }}</td>
-            <td>{{ i.loginid }}</td>
-            <td>{{ i.mobile }}</td>
-            <td>{{ i.email }}</td>
-            <td>{{ i.locality }}</td>
-            <td>{{ i.status }}</td>
-            <td>
-                {% if i.status == 'waiting' %}
-                <a class="btn-activate" href="/ActivaUsers/?uid={{ i.id }}">Activate</a>
-                {% else %}
-                Activated
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-wrap">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Login ID</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Locality</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.loginid }}</td>
+                <td>{{ i.mobile }}</td>
+                <td>{{ i.email }}</td>
+                <td>{{ i.locality }}</td>
+                <td>
+                    {% if i.status == 'activated' %}
+                        <span class="badge badge-success">Active</span>
+                    {% else %}
+                        <span class="badge badge-warning">Waiting</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        {% if i.status == 'waiting' %}
+                        <a href="/ActivaUsers/?uid={{ i.id }}" class="btn btn-success btn-sm">Activate</a>
+                        {% endif %}
+                        <a href="{% url 'ChangePassword' %}?uid={{ i.id }}" class="btn btn-ghost btn-sm">Change Password</a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8" class="table-empty">No users registered yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}

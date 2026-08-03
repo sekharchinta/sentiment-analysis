@@ -1,74 +1,30 @@
 {% extends 'admins/adminbase.html' %}
 {% block contents %}
 
-<div class="admin-home">
-    <div class="welcome-text">
-        <h4>Welcome to Admin Homepage...</h4>
+<h2 class="page-title">Welcome to Admin Homepage</h2>
+
+<div class="stat-grid">
+    <div class="stat-tile">
+        <div class="stat-value" style="color:#a5b4fc;">{{ total_users }}</div>
+        <div class="stat-label">Total Registered Users</div>
     </div>
-    <div class="content-box">
-        <h2 class="typewriter">Real-Time Sentiment Analysis for Smarter Emergency Response</h2>
-        <p>
-            "Unlock the power of real-time sentiment analysis with advanced NLP techniques.
-            Our system enhances emergency response by detecting emotional cues in calls,
-            ensuring faster, more efficient dispatch decisions. By integrating contextual
-            sentiment and topic analysis, we revolutionize public safety, providing a smarter,
-            more empathetic response to critical situations."
-        </p>
+    <div class="stat-tile">
+        <div class="stat-value" style="color:#6ee7b7;">{{ active_users }}</div>
+        <div class="stat-label">Active Users</div>
+    </div>
+    <div class="stat-tile">
+        <div class="stat-value" style="color:#fcd34d;">{{ pending_users }}</div>
+        <div class="stat-label">Pending Activation</div>
     </div>
 </div>
 
-<style>
-    .admin-home {
-        text-align: center;
-    }
-
-    .welcome-text {
-        margin-top: 20px;
-        color: #60a5fa;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .content-box {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 30px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(51, 65, 85, 0.4);
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .typewriter {
-        font-size: 20px;
-        font-weight: bold;
-        overflow: hidden;
-        border-right: 3px solid #60a5fa;
-        white-space: nowrap;
-        width: 0;
-        animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
-        background: linear-gradient(to right, #60a5fa, #22d3ee, #2dd4bf);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    @keyframes typing {
-        from { width: 0; }
-        to { width: 100%; }
-    }
-
-    @keyframes blink {
-        50% { border-color: transparent; }
-    }
-
-    p {
-        font-size: 16px;
-        margin-top: 15px;
-        line-height: 1.6;
-        color: #cbd5e1;
-    }
-</style>
+<div class="card">
+    <h2 class="typewriter" style="font-size:1.3rem; font-weight:700;">Real-Time Sentiment Analysis for Smarter Emergency Response</h2>
+    <p class="text-muted mt-2">
+        Unlock the power of real-time sentiment analysis with advanced NLP techniques.
+        Our system enhances emergency response by detecting emotional cues in calls,
+        ensuring faster, more efficient dispatch decisions.
+    </p>
+</div>
 
 {% endblock %}

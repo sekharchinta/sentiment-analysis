@@ -1,88 +1,35 @@
 {% extends 'users/userbase.html' %}
 {% block contents %}
 
-<style>
-    .home-wrapper {
-        padding: 40px 0px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: calc(60vh - 80px);
-    }
+<section class="hero">
+    <h1>Welcome to the Dispatch Analysis Portal</h1>
+    <p>
+        Real-time sentiment analysis for smarter emergency response: leverage NLP
+        to enhance public safety and dispatch efficiency.
+    </p>
+</section>
 
-    .typewriter {
-        overflow: hidden;
-        border-right: 3px solid #e2e8f0;
-        white-space: nowrap;
-        animation: typing 4s steps(50, end) forwards, blink 0.8s infinite;
-        font-size: 1.5rem;
-        font-weight: 600;
-        background: linear-gradient(to right, #60a5fa, #22d3ee, #2dd4bf);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        max-width: 90%;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    @keyframes typing {
-        from { width: 0; }
-        to { width: 100%; }
-    }
-
-    @keyframes blink {
-        50% { border-color: transparent; }
-    }
-
-    .welcome-text {
-        font-size: 28px;
-        font-weight: 700;
-        color: #60a5fa;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    .info-box {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 25px 20px;
-        max-width: 800px;
-        width: 100%;
-        color: #cbd5e1;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        font-size: 16px;
-        line-height: 1.7;
-        text-align: left;
-    }
-
-    .info-box p {
-        margin-bottom: 14px;
-    }
-
-    @media (max-width: 768px) {
-        .typewriter { font-size: 1.2rem; }
-        .welcome-text { font-size: 22px; }
-        .info-box { font-size: 15px; padding: 20px 15px; }
-    }
-</style>
-
-<div class="home-wrapper">
-    <div class="typewriter">
-        "Real-Time Sentiment Analysis for Smarter Emergency Response: Leveraging NLP to Enhance Public Safety and Dispatch Efficiency"
+<section class="features">
+    <div class="feature-card">
+        <div class="feature-icon">&#128200;</div>
+        <h3>Dataset View</h3>
+        <p>Browse the labeled emergency-call dataset and search across statements.</p>
     </div>
-
-    <div class="welcome-text">
-        Welcome To User HomePage!
+    <div class="feature-card">
+        <div class="feature-icon">&#129504;</div>
+        <h3>Model Training</h3>
+        <p>Train Random Forest, SVM, and ANN models and compare performance.</p>
     </div>
-
-    <div class="info-box">
-        <p>Unlock the power of real-time sentiment analysis with advanced NLP techniques.</p>
-        <p>Our system enhances emergency response by detecting emotional cues in emergency calls, enabling faster, more efficient dispatch decisions.</p>
-        <p>By integrating contextual sentiment and topic analysis, we revolutionize public safety and resource allocation.</p>
+    <div class="feature-card">
+        <div class="feature-icon">&#128202;</div>
+        <h3>Accuracy Chart</h3>
+        <p>Visualize model accuracy with an interactive comparison chart.</p>
     </div>
-</div>
+    <div class="feature-card">
+        <div class="feature-icon">&#128680;</div>
+        <h3>Urgency Prediction</h3>
+        <p>Enter a caller statement and get an instant urgency level prediction.</p>
+    </div>
+</section>
 
 {% endblock %}
