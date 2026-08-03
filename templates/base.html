@@ -1,0 +1,276 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Police Dispatch Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            color-scheme: dark;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(30, 41, 59) 100%);
+            color: white;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Background Image with Overlay */
+        .background-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image: url('https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+        }
+
+        /* Content Container */
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(to right, rgb(30, 58, 138), rgb(49, 46, 129), rgb(88, 28, 135));
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(to right, rgb(96, 165, 250), rgb(34, 211, 238), rgb(45, 212, 191));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Navigation Styles */
+        nav {
+            position: fixed;
+            top: 6rem;
+            width: 100%;
+            background: linear-gradient(to right, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        .nav-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: rgb(203, 213, 225);
+            text-decoration: none;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(51, 65, 85, 0.5);
+            border-color: rgba(71, 85, 105, 0.5);
+            transform: scale(1.05);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Main Content Styles */
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 15rem 1rem 1rem;
+        }
+
+        .main-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(8px);
+            border-radius: 1rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 2rem 1rem 1rem ;
+        }
+
+        .card-content {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, rgb(96, 165, 250), rgb(45, 212, 191));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-text {
+            color: rgb(203, 213, 225);
+        }
+
+        /* Footer Styles */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to right, rgb(30, 58, 138), rgb(49, 46, 129), rgb(88, 28, 135));
+            padding: 1rem;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: rgb(203, 213, 225);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .nav-list {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Overlay -->
+    <div class="background-overlay"></div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <h1>Sentiment Analysis in Emergency calls</h1>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-content">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'AdminLogin' %}" class="nav-link">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                            <span>Admin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'UserLogin' %}" class="nav-link">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                            <span>User</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'UserRegister' %}" class="nav-link">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                            <span>Register</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <div class="main-card">
+                <div class="card-content">
+                    <h2>Welcome to Emergency Dispatch services</h2>
+                    <p class="card-text">
+                        Our advanced dispatch system ensures rapid response times and efficient emergency management.
+                    </p>
+                    {% block contents %}{% endblock %}
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <p class="footer-text">© 2025 Emergency Calls for Enhanced Police Dispatch Services</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# Virtual environments
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Django
+db.sqlite3
+staticfiles/
+
+# Generated at training time
+media/model_metrics.json
+
+# Project report documents
+DOCUMENTS/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local config
+.env

@@ -1,0 +1,112 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+
+{% block contents %}
+<style>
+    .container {
+        max-width: 650px;
+        margin: 40px auto;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(51, 65, 85, 0.5);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+        background: linear-gradient(to right, #60a5fa, #22d3ee, #2dd4bf);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    label {
+        color: #f8fafc;
+        font-weight: 500;
+    }
+
+    .form-control {
+        background-color: #1e293b;
+        border: 1px solid #64748b;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 15px;
+        transition: border 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+        outline: none;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #2563eb, #06b6d4);
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+        width: 100%;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(to right, #1d4ed8, #0891b2);
+    }
+
+    .prediction-output {
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .badge-urgency {
+        font-size: 16px;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .badge-low { background-color: #10b981; color: #022c22; }
+    .badge-medium { background-color: #f59e0b; color: #451a03; }
+    .badge-high { background-color: #ef4444; color: #fff; }
+</style>
+
+<div class="container">
+    <h1>Urgency Level Prediction</h1>
+
+    {% if predicted_urgency %}
+        <div class="prediction-output">
+            <p>
+                Predicted Urgency:
+                <span class="badge badge-urgency
+                    {% if predicted_urgency in 'severe critical immediate emergency life-threatening' %}badge-high
+                    {% elif predicted_urgency in 'medium high alert' %}badge-medium
+                    {% else %}badge-low{% endif %}">
+                    {{ predicted_urgency }}
+                </span>
+            </p>
+            {% if confidence %}
+                <p>Confidence: <strong>{{ confidence }}</strong></p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger mt-3">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="callerStatement" class="form-label">Caller Statement:</label>
+            <textarea class="form-control" name="callerStatement" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict Urgency Level</button>
+    </form>
+</div>
+{% endblock %}

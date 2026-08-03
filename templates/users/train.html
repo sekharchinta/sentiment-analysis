@@ -1,0 +1,75 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+
+{% block contents %}
+<style>
+    .train-wrapper {
+        padding: 20px;
+    }
+
+    h2, h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #60a5fa;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    th, td {
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        font-size: 14px;
+    }
+
+    th {
+        background-color: #3b82f6;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .best-model {
+        color: #34d399;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 15px;
+    }
+</style>
+
+<div class="train-wrapper">
+    <h2>Model Performance Metrics</h2>
+
+    {% if best_model %}
+        <div class="best-model">Best Model: {{ best_model }}</div>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1 Score</th><th>AUC ROC</th>
+        </tr>
+        {% for name, data in metrics.items %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ data.Accuracy }}</td>
+            <td>{{ data.Precision }}</td>
+            <td>{{ data.Recall }}</td>
+            <td>{{ data.F1_Score }}</td>
+            <td>{{ data.AUC_ROC }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<main>
+    <div class="main-card">
+        <div class="card-content">
+            <h2 class="typewriter">Real-Time Sentiment Analysis for Smarter Emergency Response</h2>
+            <p class="card-text">
+                Unlock the power of real-time sentiment analysis with advanced NLP techniques.
+                Our system enhances emergency response by detecting emotional cues in calls,
+                ensuring faster, more efficient dispatch decisions. By integrating contextual
+                sentiment and topic analysis, we revolutionize public safety, providing a smarter,
+                more empathetic response to critical situations.
+            </p>
+        </div>
+    </div>
+</main>
+
+<style>
+    /* Reuse the Inter font from base, optional to override */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    
+    .typewriter {
+        overflow: hidden;
+        border-right: 3px solid #fff;
+        white-space: nowrap;
+        animation: typing 4s steps(40, end) forwards, blink 0.8s infinite;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        background: linear-gradient(to right, rgb(251, 191, 36), rgb(34, 211, 238));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: rgb(203, 213, 225);
+        line-height: 1.75;
+    }
+
+    @media (max-width: 768px) {
+        .typewriter {
+            font-size: 1.2rem;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+        }
+    }
+</style>
+{% endblock %}

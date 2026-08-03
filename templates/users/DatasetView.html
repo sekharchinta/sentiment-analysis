@@ -1,0 +1,155 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+
+{% block contents %}
+<style>
+    .content-container {
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #60a5fa;
+    }
+
+    .search-bar {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .search-bar input {
+        padding: 12px 18px;
+        width: 65%;
+        max-width: 450px;
+        border: 1px solid #94a3b8;
+        border-radius: 10px;
+        background-color: #1e293b;
+        font-size: 15px;
+        color: #f1f5f9;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .search-bar input::placeholder {
+        color: #94a3b8;
+    }
+    
+    .search-bar input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        background-color: #0f172a;
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+    }
+    
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    th, td {
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: left;
+        font-size: 14px;
+    }
+
+    th {
+        background-color: #3b82f6;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    tr:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+
+        thead {
+            display: none;
+        }
+
+        tr {
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        td {
+            padding-left: 50%;
+            position: relative;
+            text-align: right;
+        }
+
+        td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
+            font-weight: bold;
+            text-transform: capitalize;
+            color: #60a5fa;
+        }
+    }
+</style>
+
+<div class="content-container">
+    <h2>View Dataset</h2>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search table..." onkeyup="filterTable()">
+    </div>
+
+    <!-- Data Table -->
+    <table id="datasetTable">
+        <thead>
+            <tr>
+                {% for column in d.columns %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in d.values %}
+                <tr>
+                    {% for cell in row %}
+                        <td data-label="{{ d.columns.forloop.parentloop.counter0 }}">{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Filter Script -->
+<script>
+    function filterTable() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const rows = document.querySelectorAll("#datasetTable tbody tr");
+
+        rows.forEach(row => {
+            const text = Array.from(row.cells).map(td => td.textContent.toLowerCase()).join(" ");
+            row.style.display = text.includes(filter) ? "" : "none";
+        });
+    }
+</script>
+{% endblock %}
